@@ -7,12 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
+import java.util.LinkedHashMap;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IReferenceDescription;
 
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
+import com.google.common.collect.SortedSetMultimap;
 import com.google.inject.Inject;
 
 /**
@@ -26,7 +31,7 @@ public class ReferenceDescriptionSorter {
 	private ProjectUtil projectUtil;
 
 	public Multimap<IProject, IReferenceDescription> sortByProject(Iterable<IReferenceDescription> referenceDescriptions) {
-		Multimap<IProject, IReferenceDescription> referencesByProject = HashMultimap.create();
+		Multimap<IProject, IReferenceDescription> referencesByProject = LinkedHashMultimap.create();
 		for (IReferenceDescription referenceDescription : referenceDescriptions) {
 			URI sourceResourceUri = referenceDescription.getSourceEObjectUri().trimFragment();
 			IProject project = projectUtil.getProject(sourceResourceUri);
@@ -38,7 +43,7 @@ public class ReferenceDescriptionSorter {
 	}
 
 	public Multimap<URI, IReferenceDescription> sortByResource(Iterable<IReferenceDescription> referenceDescriptions) {
-		Multimap<URI, IReferenceDescription> referencesByResourceURI = HashMultimap.create();
+		Multimap<URI, IReferenceDescription> referencesByResourceURI = LinkedHashMultimap.create();
 		for (IReferenceDescription referenceDescription : referenceDescriptions) {
 			URI sourceResourceUri = referenceDescription.getSourceEObjectUri().trimFragment();
 			referencesByResourceURI.put(sourceResourceUri, referenceDescription);

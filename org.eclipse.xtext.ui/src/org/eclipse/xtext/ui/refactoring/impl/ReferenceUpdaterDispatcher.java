@@ -30,7 +30,7 @@ import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 
-import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -92,7 +92,7 @@ public class ReferenceUpdaterDispatcher {
 	public static class ReferenceDescriptionAcceptor implements IReferenceFinder.Acceptor {
 
 		private Map<IResourceServiceProvider, IReferenceUpdater> provider2updater = newHashMap();
-		private Multimap<IReferenceUpdater, IReferenceDescription> updater2refs = HashMultimap.create();
+		private Multimap<IReferenceUpdater, IReferenceDescription> updater2refs = LinkedHashMultimap.create();
 
 		private StatusWrapper status;
 		private final Registry resourceServiceProviderRegistry;
